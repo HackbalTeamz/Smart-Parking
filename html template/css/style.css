@@ -1604,6 +1604,14 @@ h4.animate-box.fadeInUp.animated {
     background-size: 15px;
     background-position: 96% 50%;
 }
+.rent-text {
+    height: 44px;
+    border-radius: 3px;
+    border: none;
+    color: #333;
+    padding: 0 10px;
+    
+}
 .rent-selct option {
     padding: 5px 10px;
 }
