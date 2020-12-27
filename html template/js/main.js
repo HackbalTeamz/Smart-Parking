@@ -1,6 +1,11 @@
-var slideIndex = 0;
-showSlides();
 
+
+
+;(function () {
+	
+	'use strict';
+
+var slideIndex = 0;
 function showSlides() {
   var i;
   var slides = document.getElementsByClassName("mySlides");
@@ -12,11 +17,6 @@ function showSlides() {
   slides[slideIndex-1].style.display = "block";
   setTimeout(showSlides, 2000); // Change image every 2 seconds
 }
-
-;(function () {
-	
-	'use strict';
-
 
 
 	// iPad and iPod detection	
@@ -229,6 +229,8 @@ function showSlides() {
 
 		// Animate
 		contentWayPoint();
+		
+showSlides();
 
 	});
 
