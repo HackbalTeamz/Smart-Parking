@@ -6,7 +6,7 @@ from django_resized import ResizedImageField
 class property(models.Model):
 	name = models.CharField(max_length=100)
 	description = models.TextField()
-	mapurl = models.URLField(max_length=500)
+	mapurl = models.CharField(max_length=500,default='')
 	img1 = ResizedImageField(size=[500, 500],crop=['middle', 'center'],upload_to='property/pics', default='default.jpg')
 	img2 = ResizedImageField(size=[500, 500],crop=['middle', 'center'],upload_to='property/pics', default='default.jpg')
 	img3 = ResizedImageField(size=[500, 500],crop=['middle', 'center'],upload_to='property/pics', default='default.jpg')
