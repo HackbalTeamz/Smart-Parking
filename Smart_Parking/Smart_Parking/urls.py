@@ -23,4 +23,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',pv.index,name="index"),
     path('search',pv.search,name="search"),
+    path('pdetails/<int:id>',pv.pdetails,name="pdetails"),
 ]+ static(settings.MEDIA_URL, document_root= settings.MEDIA_ROOT)

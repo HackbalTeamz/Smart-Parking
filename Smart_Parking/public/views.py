@@ -8,3 +8,7 @@ def index(request):
 def search(request):
 	results=property.objects.all()
 	return render(request,'public/search.html',{'results':results})
+
+def pdetails(request,id):
+	result=property.objects.get(id=id)
+	return render(request,'public/single.html',{'property':result})
