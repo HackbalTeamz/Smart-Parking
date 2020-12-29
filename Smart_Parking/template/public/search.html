@@ -1,0 +1,102 @@
+{% extends 'public/base.html' %}
+{% load static %}
+
+{% block content %}
+
+            
+            <section id="car-1-projects" style="padding-top: 8em;">
+                <div class="container">
+                    <div class="row row-bottom-padded-md">
+                        <div class="col-md-8 col-md-offset-2 text-center welcome-sec">
+                            <h2 class="car-1-lead animate-box">SEARCH RESULT</h2>
+                            <h4 class="animate-box">Lorem Ipsum has been the industry's standard.</h4>
+                        </div>
+                    </div>
+                    <div class="row car-info">
+
+                        {% for item in results %}
+                        <div class="col-md-4 col-sm-6 col-xs-6 col-xxs-12 animate-box">
+                            <div class="car-1-project-item">
+                                <a href="{{ item.img1.url }}" class="image-popup">
+                                <img src="{{ item.img1.url }}" alt="Image" class="img-responsive">
+                                </a>
+                                <div class="car-1-text">
+                                    <h2>{{ item.name }}</h2>
+                                    <p><b class="old-price">$580</b>$500 <a href="login.html">Book Now</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        {% endfor %}
+
+                    </div>
+                </div>
+            </section>
+           
+      
+        <script type="text/javascript">
+            if ($(window).width() < 767) {
+                 $(document).ready(function () {
+                      $('.ft-col h3').click(function () {
+                          $('ul.ac-ul').slideUp('500');
+                          $('h3').children('span').html('<i class="fa fa-plus"></i>');  
+                          var text = $(this).parent().children('ul.ac-ul');
+            
+                          if (text.is(':hidden')) {
+                            text.slideDown('500');
+                            $(this).children('span').html('<i class="fa fa-minus"></i>');   
+                          } else {
+                            text.slideUp('500');
+                            $(this).children('span').html('<i class="fa fa-plus"></i>');    
+                          }
+                    
+                        });
+            
+                      });
+            
+                  }
+                    
+        </script>   
+        <script>
+            $(function() {
+                $('#colour-variations ul').styleSwitcher({
+                    defaultThemeId: 'theme-switch',
+                    hasPreview: false,
+                    cookie: {
+                        expires: 30,
+                        isManagingLoad: true
+                    }
+                });
+                $('.option-toggle').click(function() {
+                    $('#colour-variations').toggleClass('sleep');
+                });
+            });
+        </script>
+
+        <script>
+            $(function() {
+            
+                if ($.cookie('layoutCookie') != '') {
+                    $('body').addClass($.cookie('layoutCookie'));
+                }
+                $('a[data-layout="boxed"]').click(function(event) {
+                    event.preventDefault();
+                    $.cookie('layoutCookie', 'boxed', {
+                        expires: 7,
+                        path: '/'
+                    });
+                    $('body').addClass($.cookie('layoutCookie')); // the value is boxed.
+                });
+                $('a[data-layout="wide"]').click(function(event) {
+                    event.preventDefault();
+                    $('body').removeClass($.cookie('layoutCookie')); // the value is boxed.
+                    $.removeCookie('layoutCookie', {
+                        path: '/'
+                    }); // remove the value of our cookie 'layoutCookie'
+                });
+            });
+        </script>
+
+
+ {% endblock %}
