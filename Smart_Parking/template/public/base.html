@@ -39,10 +39,17 @@
                         <h1 id="car-1-logo"><a href="index.html"><img src="{% static 'public/images/logo.png' %}"></a></h1>
                         <ul class="pull-right right-menu">
                             <li><a href="contact.html">Contact us</a>
-                            <li><a href="login.html">Login</a>
+                                 {% if not user.is_authenticated %}
+
+                            <li><a href="login">Login</a>
                             </li>
-                            <li class="car-1-cta-btn"><a href="login.html">Sign up</a>
+                            <li class="car-1-cta-btn"><a href="signup">Signup</a>
                             </li>
+                            {% else %}
+                                <li class="car-1-cta-btn"><a href="logout">LogOut</a>
+                            </li>
+
+                            {% endif %}
                         </ul>
                     </nav>
                 </div>
