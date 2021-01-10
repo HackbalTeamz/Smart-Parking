@@ -3,7 +3,124 @@
 
 {% block content %}
 
-            
+      <style>
+
+
+h1 {
+  text-align: center;
+  font-family: Tahoma, Arial, sans-serif;
+  color: #06D85F;
+  margin: 80px 0;
+}
+
+.box {
+  width: 40%;
+  margin: 0 auto;
+  background: rgba(255,255,255,0.2);
+  padding: 35px;
+  border: 2px solid #fff;
+  border-radius: 20px/50px;
+  background-clip: padding-box;
+  text-align: center;
+}
+
+.button {
+
+
+  cursor: pointer;
+  transition: all 0.3s ease-out;
+}
+.button:hover {
+  background: #06D85F;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  transition: opacity 500ms;
+  visibility: hidden;
+  opacity: 0;
+}
+.overlay:target {
+  visibility: visible;
+  opacity: 1;
+}
+
+.popup {
+  margin: 70px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 5px;
+  width: 30%;
+  position: relative;
+  transition: all 5s ease-in-out;
+}
+
+.popup h2 {
+  margin-top: 0;
+  color: #333;
+  font-family: Tahoma, Arial, sans-serif;
+}
+.popup .close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  transition: all 200ms;
+  font-size: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #333;
+}
+.popup .close:hover {
+  color: #06D85F;
+}
+.popup .content {
+  max-height: 30%;
+  overflow: auto;
+}
+
+@media screen and (max-width: 700px){
+  .box{
+    width: 70%;
+  }
+  .popup{
+    width: 70%;
+  }
+}
+
+.time-slot              {  }
+.time-slot input     { display:none; }
+.time-slot label     { 
+  padding:10px 20px; 
+  color:#FFF; 
+  cursor:pointer; 
+  background:#EEE; 
+  border-radius:5px; 
+    transition:0.3s ease all;
+  -moz-transition:0.3s ease all;
+  -webkit-transition:0.3s ease all;
+}
+
+.time-slot input:checked ~ label { 
+  background:#f2dede; 
+  cursor:not-allowed;
+  animation:flashBooked 0.5s ease; 
+  -moz-animation:flashBooked 0.5s ease; 
+  -webkit-animation:flashBooked 0.5s ease; 
+}
+
+.time-slot input:not(:checked) ~ label { 
+  background:#6AB074; 
+  animation:flashAvailable 0.5s ease; 
+  -moz-animation:flashAvailable 0.5s ease; 
+  -webkit-animation:flashAvailable 0.5s ease; 
+}
+
+</style>      
 
             <section id="car-1-features-2" class="holiday-sec" style="padding-top: 12em;">
                 <div class="container">
@@ -62,7 +179,8 @@
                                 </ul>
                             </div>
                             <div class="car-1-btn-action animate-box">
-                                <a href="login.html" class="btn btn-primary btn-cta">Book Now</a>
+                                
+                                <a class="button btn btn-primary btn-cta" href="#popup1">Book Now</a>
                             </div>
                         </div>
                     </div>
@@ -102,4 +220,32 @@
                 </div>
             </section>
 
+<div id="popup1" class="overlay">
+    <div class="popup">
+        <h2>Here i am</h2>
+        <a class="close" href="#">&times;</a>
+        <div class="content">
+
+
+
+            <div class="time-slot ng-scope" ng-repeat="slot in day.slots">      
+        <input type="checkbox" id="Monday-0" ng-model="slot.booked" ng-disabled="slot.booked" class="ng-untouched ng-valid ng-dirty">
+        <label for="Monday-0" class="ng-binding">1:00pm<br>
+          <span ng-if="!slot.booked" class="ng-scope">Available</span>
+        </label>
+      </div>
+
+      <div class="time-slot ng-scope" ng-repeat="slot in day.slots">      
+        <input type="checkbox" id="Monday-2" ng-model="slot.booked" ng-disabled="slot.booked" class="ng-untouched ng-valid ng-dirty">
+        <label for="Monday-2" class="ng-binding">1:00pm<br>
+          <span ng-if="!slot.booked" class="ng-scope">Available</span>
+        </label>
+      </div>
+
+
+
+
+              </div>
+    </div>
+</div>
            {% endblock %}
