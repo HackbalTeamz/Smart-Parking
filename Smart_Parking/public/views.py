@@ -46,7 +46,7 @@ def pdetails(request,id):
 
 
 
-	return render(request,'public/single.html',{'property':result,'isavailable':isavailable,'istw':istw,'isfw':isfw,'isfenced':isfenced,'isroofed':isroofed})
+	return render(request,'public/single.html',{'pslots':plotresult,'property':result,'isavailable':isavailable,'istw':istw,'isfw':isfw,'isfenced':isfenced,'isroofed':isroofed})
 
 def logout(request):
 	if request.user.is_anonymous:
