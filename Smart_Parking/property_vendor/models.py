@@ -28,7 +28,7 @@ class pslot(models.Model):
 	isfenced = models.BooleanField(default=True)
 
 	def __str__(self):
-		return self.propertyid.name
+		return self.propertyid.name+str(self.id)
 
 class userProfile(models.Model):
 	user = models.OneToOneField(User, on_delete=models.CASCADE)
