@@ -9,18 +9,18 @@
                     <div class="car-1-intro js-fullheight">
                         <div class="car-1-intro-text">
                             <div class="car-1-center-position">
-                                <h3 class="animate-box">Time to go</h3>
+                                <h3 class="animate-box">Time to Rest</h3>
                                 <h2 class="animate-box">Lorem Ipsum has been the standard.</h2>
                                 <div class="rent-form">
                                     <form action="search">
-                                        <input type="text"  placeholder="Search Location" class="animate-box rent-text">
+                                        <input type="text" name="place"  placeholder="Search Location" class="animate-box rent-text" required="">
                                         
-                                        <select class="animate-box rent-selct">
-                                            <option>Choose Vehicle Type</option>
-                                            <option>2 wheeler</option>
-                                            <option>4 wheeler</option>
+                                        <select name="type" class="animate-box rent-selct" required="">
+                                           <option value= "" selected disabled hidden>Choose Vehicle Type</option>
+                                            <option value="2">2 wheeler</option>
+                                            <option value="4">4 wheeler</option>
                                         </select>
-                                        <input type="date" id="datepicker" placeholder="Date" class="animate-box rent-date">
+                                        <!-- <input type="date" id="datepicker" placeholder="Date" class="animate-box rent-date"> -->
                                     
                                     <p class="animate-box main-btn">
                                         <input type="submit" class="btn btn-primary" value="Search">
