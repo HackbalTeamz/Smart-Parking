@@ -10,7 +10,9 @@ class property(models.Model):
 	img1 = ResizedImageField(size=[500, 500],crop=['middle', 'center'],upload_to='property/pics', default='default.jpg')
 	img2 = ResizedImageField(size=[500, 500],crop=['middle', 'center'],upload_to='property/pics', default='default.jpg')
 	img3 = ResizedImageField(size=[500, 500],crop=['middle', 'center'],upload_to='property/pics', default='default.jpg')
-	isactive = models.BooleanField(default=True) 
+	isactive = models.BooleanField(default=True)
+	place = models.CharField(max_length=200,default='')
+	district = models.CharField(max_length=200,default='')
 	created_at = models.DateField(auto_now_add=True)
 	owner = models.ForeignKey(User,default=None,on_delete=models.CASCADE)#for now to pass form validation,will remove later
 
