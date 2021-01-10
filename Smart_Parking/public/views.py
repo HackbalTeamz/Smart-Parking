@@ -7,12 +7,46 @@ def index(request):
 	return render(request,'public/index.html')
 
 def search(request):
+	'''try:
+		place = request.GET['place']
+		vtype = request.GET['type']
+	except:
+		vtype = 'All'
+		place = ""	
+
+		All1=products.objects.filter(isactive=True,pname__icontains=name,owner__userprofile__pincode__range=[int(request.user.userprofile.pincode)-2,int(request.user.userprofile.pincode)+2]).order_by('id')
+
+	return render(request, 'public/shop.html',{'All':All,'Vegetables':Vegetables,'Fruits':Fruits,'Products':Product,'Dried':Dried,'cat':cat})
+'''
 	results=property.objects.all()
 	return render(request,'public/search.html',{'results':results})
 
 def pdetails(request,id):
+	isfw=False
+	istw=False
+	isroofed=False
+	isfenced=False
+	isavailable=False
+
 	result=property.objects.get(id=id)
-	return render(request,'public/single.html',{'property':result})
+	plotresult=pslot.objects.filter(propertyid=id)
+	for plot in plotresult:
+		if plot.isfw:
+			isfw=True
+		if plot.istw:
+			istw=True
+		if plot.isroofed:
+			isroofed=True
+		if plot.isfenced:
+			isfenced=True
+		if plot.isavailable:
+			isavailable=True
+
+			
+
+
+
+	return render(request,'public/single.html',{'property':result,'isavailable':isavailable,'istw':istw,'isfw':isfw,'isfenced':isfenced,'isroofed':isroofed})
 
 def logout(request):
 	if request.user.is_anonymous:

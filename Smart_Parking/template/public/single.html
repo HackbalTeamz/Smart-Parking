@@ -43,15 +43,20 @@
                             <div class="vehicle-info">
                                 <p class="animate-box">{{ property.description}}</p>
                                 <ul>
-                                    <li class="animate-box">Usage Time <span>4 Hours</span>
+                                    
+
+
+
+                             
+                                    <li class="animate-box">4 wheeler <span>{% if isfw %}yes{% else %}No{% endif %}</span>
                                     </li>
-                                    <li class="animate-box">Limited Editions <span>$1000</span>
+                                    <li class="animate-box">2 wheeler <span>{% if istw %}yes{% else %}No{% endif %}</span>
                                     </li>
-                                    <li class="animate-box">Kms Included <span>40 Kms</span>
+                                    <li class="animate-box">Roof<span>{% if isroofed %}yes{% else %}No{% endif %}</span>
                                     </li>
-                                    <li class="animate-box">Cost Per Excess KM <span>$50</span>
+                                    <li class="animate-box">Fence<span>{% if isfenced %}yes{% else %}No{% endif %}</span>
                                     </li>
-                                    <li class="animate-box">Cost Per Excess Hour <span>$100</span>
+                                    <li class="animate-box">Empty Slot Available<span>{% if isavailable %}yes{% else %}No{% endif %}</span>
                                     </li>
                                 </ul>
                             </div>
