@@ -1,25 +1,30 @@
 from django.shortcuts import render, redirect
 from property_vendor.models import property,pslot,userProfile
 from django.contrib.auth.models import User, auth
+from django.db.models import Q
 
 # Create your views here.
 def index(request):
 	return render(request,'public/index.html')
 
 def search(request):
-	'''try:
+	
+	try:
 		place = request.GET['place']
-		vtype = request.GET['type']
+		vtype = int(request.GET['type'])
 	except:
 		vtype = 'All'
 		place = ""	
-
-		All1=products.objects.filter(isactive=True,pname__icontains=name,owner__userprofile__pincode__range=[int(request.user.userprofile.pincode)-2,int(request.user.userprofile.pincode)+2]).order_by('id')
-
-	return render(request, 'public/shop.html',{'All':All,'Vegetables':Vegetables,'Fruits':Fruits,'Products':Product,'Dried':Dried,'cat':cat})
-'''
-	results=property.objects.all()
-	return render(request,'public/search.html',{'results':results})
+	lookups= Q(propertyid__place__icontains=place) | Q(propertyid__district__icontains=place)
+	if vtype==2:
+		pslots=pslot.objects.values_list('propertyid',flat=True).filter(lookups,istw=True,isavailable=True).distinct()
+		print(pslots)
+		results=property.objects.filter(id__in=pslots)
+		return render(request,'public/search.html',{'results':results})
+	else:
+		pslots=pslot.objects.values_list('propertyid',flat=True).filter(lookups,isfw=True,isavailable=True).distinct()
+		results=property.objects.filter(id__in=pslots)
+		return render(request,'public/search.html',{'results':results})
 
 def pdetails(request,id):
 	isfw=False
