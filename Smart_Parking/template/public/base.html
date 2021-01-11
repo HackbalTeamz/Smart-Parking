@@ -41,12 +41,12 @@
                             <li><a href="contact.html">Contact us</a>
                                  {% if not user.is_authenticated %}
 
-                            <li><a href="login">Login</a>
+                            <li><a href="/login">Login</a>
                             </li>
-                            <li class="car-1-cta-btn"><a href="signup">Signup</a>
+                            <li class="car-1-cta-btn"><a href="/signup">Signup</a>
                             </li>
                             {% else %}
-                                <li class="car-1-cta-btn"><a href="logout">LogOut</a>
+                                <li class="car-1-cta-btn"><a href="/logout">LogOut</a>
                             </li>
 
                             {% endif %}
