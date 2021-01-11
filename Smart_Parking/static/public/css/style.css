@@ -96,6 +96,7 @@ h1 {
 
 .unavailable{
     background:#B51E23;
+    cursor: not-allowed;
 }
 .available{
       cursor:pointer;
