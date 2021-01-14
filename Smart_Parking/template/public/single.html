@@ -116,7 +116,7 @@
 
                 {% for pslot in pslots %}
                 {% if pslot.isavailable %}
-         <a href="">   
+         <a href="/booking/{{pslot.id }}">   
         <label for="Monday-0" class="ng-binding available">{{ pslot.id}}<br>
           <span class="ng-scope">4 wheeler : <span>{% if pslot.isfw %}yes{% else %}No{% endif %}</span></span><br>
            <span class="ng-scope">2 wheeler : <span>{% if pslot.istw %}yes{% else %}No{% endif %}</span></span><br>

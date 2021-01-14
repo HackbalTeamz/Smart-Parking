@@ -26,4 +26,5 @@ urlpatterns = [
     path('pdetails/<int:id>',pv.pdetails,name="pdetails"),
     path('login',pv.login,name="login"),
     path('logout',pv.logout,name="logout"),
+    path('booking/<int:id>',pv.booking,name="booking"),
 ]+ static(settings.MEDIA_URL, document_root= settings.MEDIA_ROOT)

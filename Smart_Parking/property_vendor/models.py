@@ -41,6 +41,24 @@ class userProfile(models.Model):
 
 	def __str__(self):
 		return self.user.username
+
+
+class bookingDetails(models.Model):
+	userid = models.ForeignKey(User,default=None,on_delete=models.CASCADE)
+	pslotid = models.ForeignKey(pslot,default=None,on_delete=models.CASCADE)
+	date = models.DateTimeField(auto_now_add=True)
+	vtype = models.IntegerField(default=2)
+	regnum = models.CharField(max_length=12,default='')
+	status = models.BooleanField(default=True)
+
+def check_pslot_availability(pid):
+	slot=pslot.objects.get(id=pid)
+	book=bookingDetails.objects.get(pslotid=slot,status=True)
+	if book:
+		slot.isavailable=False
+		slot.save()
+		print("marked unavailable")
+
 '''		
 def check_product_stock(pid):
 	product=products.objects.get(id=pid)

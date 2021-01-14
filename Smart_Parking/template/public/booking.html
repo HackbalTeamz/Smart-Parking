@@ -1,0 +1,36 @@
+{% extends 'public/base.html' %}
+{% load static %}
+
+{% block content %}
+
+            <section id="login-sec">
+                <div class="container login-sec">
+                    <form class="login-form" method="post" action="/booking/{{pslot.id}}">
+                        {% csrf_token %}
+                        <ul>
+                            <h2>Booking Details</h2>
+                            <li><input type="text" name="regno" placeholder="Registration Number" class="login-txt"></li>
+                            <li><select name="type" class="animate-box rent-selct" required="">
+                                           <option value= "" selected disabled hidden>Choose Vehicle Type</option>
+                                            <option value="2">2 wheeler</option>
+                                            <option value="4">4 wheeler</option>
+                                        </select></li>
+                            <li><input type="submit" class="btn btn-primary" value="Book"></li>
+                        </ul>
+                        
+                        <ul>
+                            <li>Slot Number :::  {{ pslot.id }}</li>
+                            <li>Roof :::  {% if pslot.isroofed %}yes{% else %}No{% endif %}</li>
+                            <li>Fence :::  {% if pslot.isfenced %}yes{% else %}No{% endif %}</li>
+                            <li>Place :::  {{ pslot.propertyid.place }}{{ pslot.propertyid.district }}</li>
+                        </ul>
+                        {% if status %}
+                        <ul>
+                            <h6 style="color: red; text-align: center;">Username/Password wrong...!</h6></ul>
+                         {% endif %}
+                    </form>
+                </div>
+            </section>
+       
+            
+             {% endblock %}

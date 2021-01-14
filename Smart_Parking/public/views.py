@@ -1,11 +1,25 @@
 from django.shortcuts import render, redirect
-from property_vendor.models import property,pslot,userProfile
+from property_vendor.models import property,pslot,userProfile,bookingDetails,check_pslot_availability
 from django.contrib.auth.models import User, auth
 from django.db.models import Q
 
 # Create your views here.
 def index(request):
 	return render(request,'public/index.html')
+
+def booking(request,id):
+	if request.method == 'POST':
+		regno=request.POST['regno']
+		vtype=request.POST['type']
+		slot=pslot.objects.get(id=id)
+		pbook=bookingDetails.objects.create(userid=request.user,pslotid=slot,vtype=vtype,regnum=regno,status=True)
+		pbook.save()
+		print('created')
+		check_pslot_availability(id)
+		return render(request,'public/success.html')
+	else:
+		slot=pslot.objects.get(id=id)
+		return render(request,'public/booking.html',{'pslot':slot})
 
 def search(request):
 	
