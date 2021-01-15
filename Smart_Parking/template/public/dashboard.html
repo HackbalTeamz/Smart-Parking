@@ -1,0 +1,121 @@
+{% extends 'public/base.html' %}
+{% load static %}
+
+{% block content %}
+
+            
+            <section id="car-1-projects" style="padding-top: 8em;">
+                <div class="container">
+                    <div class="row row-bottom-padded-md">
+                        <div class="col-md-8 col-md-offset-2 text-center welcome-sec">
+                            <h2 class="car-1-lead animate-box">Your Active Parking Slots</h2>
+                            <h4 class="animate-box">Lorem Ipsum has been the industry's standard.</h4>
+                        </div>
+                    </div>
+                    <div class="row car-info">
+                         {% if pbooks %}
+                        {% for item in pbooks %}
+                        <div class="col-md-12 col-sm-6 col-xs-6 col-xxs-12 " style="background: white;">
+                            <div class="col-md-4  ">
+                                <a href="{{ item.pslotid.propertyid.img1.url }}" class="image-popup">
+                                <img src="{{ item.pslotid.propertyid.img1.url }}" alt="Image" class="img-responsive">
+                                </a>
+                            </div>
+                                <div class="col-md-4 " style="    padding: 80px 0;">
+                                    <h2 style="color: black;text-align: center;">{{ item.pslotid.propertyid.name }}</h2>
+                                    <h5 style="color: black;text-align: center;">{{ item.regnum }}</h5>
+                                    <h5 style="color: black;text-align: center;">{{ item.vtype }} wheeler</h5>
+                                    <p style="color: black;text-align: center;"><b style="font-weight: 300;">{{ item.pslotid.propertyid.place }},{{ item.pslotid.propertyid.district }} </b>
+                                    </p>
+                                </div>
+                                <div class="col-md-4 " style="text-align: center;padding: 95px;">
+                                    <p>
+                                     <a class="dashbtn" href="pdetails/{{item.pslotid.propertyid.id}}">View</a>
+                                    
+                                   </p>
+                                   <p>
+                                     
+                                    <a class="dashbtn" href="pdetails/{{item.id}}">Checkout</a>
+                                   </p>
+                                </div>
+                            
+                        </div>
+
+                        {% endfor %}
+                        {% else %}
+                        <div class="col-md-12 col-sm-6 col-xs-6 col-xxs-12 " style="text-align: center;">
+                            <h2>No Booking Found..!</h2>
+                            
+                        </div>
+                        {% endif %}
+
+                    </div>
+                </div>
+            </section>
+           
+      
+        <script type="text/javascript">
+            if ($(window).width() < 767) {
+                 $(document).ready(function () {
+                      $('.ft-col h3').click(function () {
+                          $('ul.ac-ul').slideUp('500');
+                          $('h3').children('span').html('<i class="fa fa-plus"></i>');  
+                          var text = $(this).parent().children('ul.ac-ul');
+            
+                          if (text.is(':hidden')) {
+                            text.slideDown('500');
+                            $(this).children('span').html('<i class="fa fa-minus"></i>');   
+                          } else {
+                            text.slideUp('500');
+                            $(this).children('span').html('<i class="fa fa-plus"></i>');    
+                          }
+                    
+                        });
+            
+                      });
+            
+                  }
+                    
+        </script>   
+        <script>
+            $(function() {
+                $('#colour-variations ul').styleSwitcher({
+                    defaultThemeId: 'theme-switch',
+                    hasPreview: false,
+                    cookie: {
+                        expires: 30,
+                        isManagingLoad: true
+                    }
+                });
+                $('.option-toggle').click(function() {
+                    $('#colour-variations').toggleClass('sleep');
+                });
+            });
+        </script>
+
+        <script>
+            $(function() {
+            
+                if ($.cookie('layoutCookie') != '') {
+                    $('body').addClass($.cookie('layoutCookie'));
+                }
+                $('a[data-layout="boxed"]').click(function(event) {
+                    event.preventDefault();
+                    $.cookie('layoutCookie', 'boxed', {
+                        expires: 7,
+                        path: '/'
+                    });
+                    $('body').addClass($.cookie('layoutCookie')); // the value is boxed.
+                });
+                $('a[data-layout="wide"]').click(function(event) {
+                    event.preventDefault();
+                    $('body').removeClass($.cookie('layoutCookie')); // the value is boxed.
+                    $.removeCookie('layoutCookie', {
+                        path: '/'
+                    }); // remove the value of our cookie 'layoutCookie'
+                });
+            });
+        </script>
+
+
+ {% endblock %}

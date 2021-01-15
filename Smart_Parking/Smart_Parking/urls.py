@@ -27,4 +27,5 @@ urlpatterns = [
     path('login',pv.login,name="login"),
     path('logout',pv.logout,name="logout"),
     path('booking/<int:id>',pv.booking,name="booking"),
+    path('dashboard',pv.dashboard,name="dashboard"),
 ]+ static(settings.MEDIA_URL, document_root= settings.MEDIA_ROOT)

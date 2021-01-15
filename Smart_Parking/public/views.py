@@ -7,6 +7,10 @@ from django.db.models import Q
 def index(request):
 	return render(request,'public/index.html')
 
+def dashboard(request):
+	pbooks=bookingDetails.objects.filter(userid=request.user,status=True)
+	return render(request,'public/dashboard.html',{'pbooks':pbooks})
+
 def booking(request,id):
 	if request.method == 'POST':
 		regno=request.POST['regno']
