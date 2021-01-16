@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django_resized import ResizedImageField
+from datetime import datetime 
 
 # Create your models here.
 class property(models.Model):
@@ -46,12 +47,13 @@ class userProfile(models.Model):
 class bookingDetails(models.Model):
 	userid = models.ForeignKey(User,default=None,on_delete=models.CASCADE)
 	pslotid = models.ForeignKey(pslot,default=None,on_delete=models.CASCADE)
-	date = models.DateTimeField(auto_now_add=True)
+	bdate = models.DateTimeField(auto_now_add=True)
+	cdate = models.DateTimeField(default=datetime.now, blank=True)
 	vtype = models.IntegerField(default=2)
 	regnum = models.CharField(max_length=12,default='')
 	status = models.BooleanField(default=True)
 
-def check_pslot_availability(pid):
+def mark_pslot_unavailable(pid):
 	slot=pslot.objects.get(id=pid)
 	book=bookingDetails.objects.get(pslotid=slot,status=True)
 	if book:
@@ -59,6 +61,14 @@ def check_pslot_availability(pid):
 		slot.save()
 		print("marked unavailable")
 
+def mark_pslot_available(pid):
+	slot=pslot.objects.get(id=pid)
+	book=bookingDetails.objects.get(pslotid=slot,status=True)
+	if book:
+		slot.isavailable=True
+		slot.cdate
+		slot.save()
+		print("marked available")
 '''		
 def check_product_stock(pid):
 	product=products.objects.get(id=pid)
