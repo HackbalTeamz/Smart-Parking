@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
-from property_vendor.models import property,pslot,userProfile,bookingDetails,check_pslot_availability
+from property_vendor.models import property,pslot,userProfile,bookingDetails,mark_pslot_unavailable,mark_pslot_available
 from django.contrib.auth.models import User, auth
 from django.db.models import Q
+from datetime import datetime 
 
 # Create your views here.
 def index(request):
@@ -11,6 +12,17 @@ def dashboard(request):
 	pbooks=bookingDetails.objects.filter(userid=request.user,status=True)
 	return render(request,'public/dashboard.html',{'pbooks':pbooks})
 
+def checkout(request,id):
+
+	book=bookingDetails.objects.get(id=id,status=True)
+	book.status=False
+	book.cdate=datetime.now()
+	mark_pslot_available(book.pslotid.id)
+	book.save()
+	print('chekout')
+	return render(request,'public/checkout.html')
+	
+
 def booking(request,id):
 	if request.method == 'POST':
 		regno=request.POST['regno']
@@ -19,7 +31,7 @@ def booking(request,id):
 		pbook=bookingDetails.objects.create(userid=request.user,pslotid=slot,vtype=vtype,regnum=regno,status=True)
 		pbook.save()
 		print('created')
-		check_pslot_availability(id)
+		mark_pslot_unavailable(id)
 		return render(request,'public/success.html')
 	else:
 		slot=pslot.objects.get(id=id)

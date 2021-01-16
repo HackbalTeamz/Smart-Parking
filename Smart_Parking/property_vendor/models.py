@@ -66,7 +66,6 @@ def mark_pslot_available(pid):
 	book=bookingDetails.objects.get(pslotid=slot,status=True)
 	if book:
 		slot.isavailable=True
-		slot.cdate
 		slot.save()
 		print("marked available")
 '''		
