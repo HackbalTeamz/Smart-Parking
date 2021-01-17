@@ -9,7 +9,7 @@
                     <div class="car-1-intro js-fullheight">
                         <div class="car-1-intro-text">
                             <div class="car-1-center-position">
-                                <h3 class="animate-box">Time to Rest</h3>
+                                <h3 class="animate-box">Time to Rest..</h3>
                                 <h2 class="animate-box">Lorem Ipsum has been the standard.</h2>
                                 <div class="rent-form">
                                     <form action="search">
@@ -41,26 +41,21 @@
             <div class="phone-form">
                 <div class="container">
                     <div class="rent-form">
-                        <form>
-                            <select class="animate-box rent-selct fadeInUp animated">
-                                <option>Choose Location</option>
-                                <option>Alaska</option>
-                                <option>Arizona</option>
-                                <option>New Jersey</option>
-                                <option>New York</option>
-                            </select>
-                            <select class="animate-box rent-selct fadeInUp animated">
-                                <option>Choose Car</option>
-                                <option>Chevrolet Camaro</option>
-                                <option>Ford Mustang</option>
-                                <option>Rolls Royce</option>
-                                <option>Audi A4</option>
-                            </select>
-                            <input type="text" id="datepicker" placeholder="Date" class="animate-box rent-date hasDatepicker fadeInUp animated">
-                        </form>
-                        <p class="animate-box main-btn">
-                            <a href="#" target="_blank" class="btn btn-primary">Book Now</a>
-                        </p>
+                        <form action="search">
+                                        <input type="text" name="place"  placeholder="Search Location" class="animate-box rent-text" required="" style="    margin-bottom: 20px;">
+                                        <br>
+                                        <select name="type" class="animate-box rent-selct" required="" >
+                                           <option value= "" selected disabled hidden>Choose Vehicle Type</option>
+                                            <option value="2">2 wheeler</option>
+                                            <option value="4">4 wheeler</option>
+                                        </select>
+                                        <!-- <input type="date" id="datepicker" placeholder="Date" class="animate-box rent-date"> -->
+                                    
+                                    <p class="animate-box main-btn">
+                                        <input type="submit" class="btn btn-primary" value="Search">
+                                    </p>
+                                    </form>
+                        
                     </div>
                 </div>
             </div>
