@@ -3,6 +3,7 @@ from property_vendor.models import property,pslot,userProfile,bookingDetails,mar
 from django.contrib.auth.models import User, auth
 from django.db.models import Q
 from datetime import datetime 
+from django.http import HttpResponse
 
 # Create your views here.
 def index(request):
@@ -22,6 +23,23 @@ def checkout(request,id):
 	print('chekout')
 	return render(request,'public/checkout.html')
 	
+def payment(request,id):
+	response = HttpResponse("", status=302)
+	book=bookingDetails.objects.get(id=id,status=True)
+
+	tz_info = book.bdate.tzinfo
+	time_delta = datetime.now(tz_info)-book.bdate
+	total_seconds = time_delta.total_seconds()
+	minutes = total_seconds/60
+
+	amt=int(minutes*book.pslotid.rate)
+	
+	book.amt=amt
+
+	response['Location'] = "upi://pay?pa="+book.pslotid.propertyid.upi+"&pn="+book.pslotid.propertyid.owner.first_name+" "+book.pslotid.propertyid.owner.last_name+"&cu=INR&am="+str(amt)
+	print(response['Location'])
+	book.save()
+	return response
 
 def booking(request,id):
 	if request.method == 'POST':

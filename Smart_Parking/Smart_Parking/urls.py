@@ -29,4 +29,5 @@ urlpatterns = [
     path('booking/<int:id>',pv.booking,name="booking"),
     path('dashboard',pv.dashboard,name="dashboard"),
     path('checkout/<int:id>',pv.checkout,name="checkout"),
+    path('payment/<int:id>',pv.payment,name="payment"),
 ]+ static(settings.MEDIA_URL, document_root= settings.MEDIA_ROOT)

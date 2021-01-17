@@ -12,6 +12,7 @@ class property(models.Model):
 	img2 = ResizedImageField(size=[500, 500],crop=['middle', 'center'],upload_to='property/pics', default='default.jpg')
 	img3 = ResizedImageField(size=[500, 500],crop=['middle', 'center'],upload_to='property/pics', default='default.jpg')
 	isactive = models.BooleanField(default=True)
+	upi = models.CharField(max_length=30,null=True,blank=True,default = None)
 	place = models.CharField(max_length=200,default='')
 	district = models.CharField(max_length=200,default='')
 	created_at = models.DateField(auto_now_add=True)
@@ -27,6 +28,7 @@ class pslot(models.Model):
 	isavailable = models.BooleanField(default=True)
 	isroofed = models.BooleanField(default=True)
 	isfenced = models.BooleanField(default=True)
+	rate = models.IntegerField(default=2)
 
 	def __str__(self):
 		return self.propertyid.name+str(self.id)
@@ -51,6 +53,7 @@ class bookingDetails(models.Model):
 	cdate = models.DateTimeField(default=datetime.now, blank=True)
 	vtype = models.IntegerField(default=2)
 	regnum = models.CharField(max_length=12,default='')
+	amt = models.IntegerField(default=0)
 	status = models.BooleanField(default=True)
 
 def mark_pslot_unavailable(pid):
