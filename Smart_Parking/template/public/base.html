@@ -29,8 +29,11 @@
                 <div class="container">
                     <nav role="navigation">
                         <ul class="pull-left left-menu">
+                            {% if user.is_authenticated %}
+
                             <li><a href="/dashboard">Dashboard</a>
                             </li>
+                            {% endif %}
                             <li><a href="about.html">About Us</a>
                             </li>
                             
