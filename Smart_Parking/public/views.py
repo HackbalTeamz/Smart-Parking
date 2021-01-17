@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from property_vendor.models import property,pslot,userProfile,bookingDetails,mark_pslot_unavailable,mark_pslot_available
+from property_vendor.models import property,pslot,userProfile,bookingDetails,mark_pslot_unavailable,mark_pslot_available,reviewDetails
 from django.contrib.auth.models import User, auth
 from django.db.models import Q
 from datetime import datetime 
@@ -8,6 +8,27 @@ from django.http import HttpResponse
 # Create your views here.
 def index(request):
 	return render(request,'public/index.html')
+
+def addreview(request):
+	if request.user.is_anonymous:
+		return redirect('/')
+	pid = request.GET['id']
+	review = request.GET['review']
+	pro=property.objects.get(id=pid)
+	try:
+		chkreview=reviewDetails.objects.get(userid=request.user,propertyid=pro)
+	except reviewDetails.DoesNotExist:
+		chkreview = None
+	if chkreview:
+		chkreview.review=review
+		chkreview.save()
+		return HttpResponse('Review Updated')
+	else:
+		instance=reviewDetails(userid=request.user,propertyid=pro,review=review)
+		instance.save()
+		return HttpResponse('Review Added')
+	
+	return HttpResponse('Something went wrong, TryAgain')
 
 def dashboard(request):
 	pbooks=bookingDetails.objects.filter(userid=request.user,status=True)
@@ -95,11 +116,20 @@ def pdetails(request,id):
 		if plot.isavailable:
 			isavailable=True
 
-			
+	if not request.user.is_anonymous:
+		buyed=False
+		try:
+			booklist=bookingDetails.objects.filter(userid=request.user,status=False,pslotid_id__propertyid=result)
+		except:
+			pass
+		if booklist:
+			buyed=True
+	try:
+		chkreview=reviewDetails.objects.filter(propertyid=result)
+	except reviewDetails.DoesNotExist:
+		chkreview=None
 
-
-
-	return render(request,'public/single.html',{'pslots':plotresult,'property':result,'isavailable':isavailable,'istw':istw,'isfw':isfw,'isfenced':isfenced,'isroofed':isroofed})
+	return render(request,'public/single.html',{'chkreview':chkreview,'buyed':buyed,'pslots':plotresult,'property':result,'isavailable':isavailable,'istw':istw,'isfw':isfw,'isfenced':isfenced,'isroofed':isroofed})
 
 def logout(request):
 	if request.user.is_anonymous:

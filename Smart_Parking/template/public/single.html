@@ -64,11 +64,35 @@
                             <div class="car-1-btn-action animate-box">
                                 
                                 <a class="button btn btn-primary btn-cta" href="#popup1">Book Now</a>
+                                {% if buyed %}
+                 <a class="btn btn-success btn-green" data-id="{{ property.id }}" href="#" id="open-review-box">Leave a Review</a>
+                 {% endif %}
                             </div>
                         </div>
                     </div>
+                    <div  class="row container">
+            <div class="row" id="post-review-box" style="display:none;">
+                                <div class="col-md-12">
+                            
+                                        <input id="ratings-hidden" name="rating1" type="hidden"> 
+                                        <textarea class="form-control animated" cols="50" id="new-review" name="comment" placeholder="Enter your review here..." rows="5" maxlength="199"></textarea>
+                        
+                                        <div class="text-right">
+
+                                            <a class="btn btn-danger btn-sm" href="#" id="close-review-box" style="display:none; margin-right: 10px;">
+
+                                            <span class="glyphicon glyphicon-remove"></span>Cancel</a>
+                                            <button class="btn btn-success btn-lg add-review" data-id="{{ property.id }}" >Save</button>
+                                        </div>
+                                    
+                               
+
+                </div>   
+        </div>
+    </div>
                 </div>
             </section>
+            
            <section id="car-1-features-2" class="holiday-sec" style="padding-top: 12em;">
                 <div class="container">
                     <div class="row">
@@ -80,22 +104,22 @@
                         <div class="col-sm-5 col-sm-pull-7" style=" padding:20px 15px;">
                             <h2 class="car-1-lead animate-box">REVIEWS</h2>
                             <div class="vehicle-info" style="overflow-y: scroll; height: 200px;">
-                                <div>
-                                    <h3>name</h3>
-                                    <p class="animate-box">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard</p>
+                              {% if chkreview %}
+                    {% for review in chkreview %}  
+                                 <div>
+                                    <h3>{{ review.userid.first_name }}  {{ review.userid.last_name }}</h3>
+                                    <p class="animate-box">{{ review.review }}</p>
                                 </div>
+
+                    {% endfor %}
+                     {% else %}
+                                
                                 <div>
-                                    <h3>name</h3>
-                                    <p class="animate-box">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard</p>
+                                   
+                                    <p class="animate-box">NoReviews yet..!</p>
                                 </div>
-                                <div>
-                                    <h3>name</h3>
-                                    <p class="animate-box">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard</p>
-                                </div>
-                                <div>
-                                    <h3>name</h3>
-                                    <p class="animate-box">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard</p>
-                                </div>
+                               
+                                {% endif %}
                             </div>
                             
                         </div>
