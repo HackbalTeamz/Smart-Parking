@@ -71,6 +71,12 @@ def mark_pslot_available(pid):
 		slot.isavailable=True
 		slot.save()
 		print("marked available")
+
+class reviewDetails(models.Model):
+	userid = models.ForeignKey(User,default=None,on_delete=models.CASCADE)
+	propertyid = models.ForeignKey(property,default=None,on_delete=models.CASCADE)
+	review = models.CharField(max_length=200,default='')
+		
 '''		
 def check_product_stock(pid):
 	product=products.objects.get(id=pid)
