@@ -31,4 +31,5 @@ urlpatterns = [
     path('checkout/<int:id>',pv.checkout,name="checkout"),
     path('payment/<int:id>',pv.payment,name="payment"),
     path('addreview', pv.addreview,name='add_review'),
+    path('uhistory', pv.uhistory,name='uhistory'),
 ]+ static(settings.MEDIA_URL, document_root= settings.MEDIA_ROOT)

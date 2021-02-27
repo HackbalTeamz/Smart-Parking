@@ -101,7 +101,7 @@ def pdetails(request,id):
 	isroofed=False
 	isfenced=False
 	isavailable=False
-
+	buyed=False
 	result=property.objects.get(id=id)
 	plotresult=pslot.objects.filter(propertyid=id)
 	for plot in plotresult:
@@ -117,7 +117,7 @@ def pdetails(request,id):
 			isavailable=True
 
 	if not request.user.is_anonymous:
-		buyed=False
+		
 		try:
 			booklist=bookingDetails.objects.filter(userid=request.user,status=False,pslotid_id__propertyid=result)
 		except:
@@ -130,6 +130,14 @@ def pdetails(request,id):
 		chkreview=None
 
 	return render(request,'public/single.html',{'chkreview':chkreview,'buyed':buyed,'pslots':plotresult,'property':result,'isavailable':isavailable,'istw':istw,'isfw':isfw,'isfenced':isfenced,'isroofed':isroofed})
+
+def uhistory(request):
+	try:
+		booklist=bookingDetails.objects.filter(userid=request.user,status=False)
+		print(booklist)
+	except:
+		booklist=None
+	return render(request,'public/uhistory.html',{'history':booklist})
 
 def logout(request):
 	if request.user.is_anonymous:
