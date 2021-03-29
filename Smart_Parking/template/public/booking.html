@@ -15,7 +15,11 @@
                                             <option value="2">2 wheeler</option>
                                             <option value="4">4 wheeler</option>
                                         </select></li>
-                            <li><input type="submit" class="btn btn-primary" value="Book"></li>
+                            <li>{% if user.is_authenticated %}<input type="submit" class="btn btn-primary" value="Book">
+                            {%else%}
+                        <a href="/login" class="btn btn-primary" >Sign in to Book</a>
+                    {%endif%}
+                </li>
                         </ul>
                         
                         <ul>
