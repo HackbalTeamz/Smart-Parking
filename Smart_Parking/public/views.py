@@ -133,7 +133,7 @@ def pdetails(request,id):
 
 def uhistory(request):
 	try:
-		booklist=bookingDetails.objects.filter(userid=request.user,status=False)
+		booklist=bookingDetails.objects.filter(userid=request.user,status=False).order_by('-id')
 		print(booklist)
 	except:
 		booklist=None
