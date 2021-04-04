@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from public import views as pv
+from property_vendor import views as vv
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -32,4 +33,5 @@ urlpatterns = [
     path('payment/<int:id>',pv.payment,name="payment"),
     path('addreview', pv.addreview,name='add_review'),
     path('uhistory', pv.uhistory,name='uhistory'),
+    path('slotmanage', vv.slotmanage,name='slotmanage'),
 ]+ static(settings.MEDIA_URL, document_root= settings.MEDIA_ROOT)
