@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import property,pslot,userProfile,bookingDetails,mark_pslot_unavailable,mark_pslot_available,reviewDetails
 from django.contrib.auth.models import User, auth
 
@@ -36,3 +36,9 @@ def vpdetails(request,id):
 		chkreview=None
 
 	return render(request,'vendor/single.html',{'chkreview':chkreview,'pslots':plotresult,'property':result,'isavailable':isavailable,'istw':istw,'isfw':isfw,'isfenced':isfenced,'isroofed':isroofed})
+
+def deleteslot(request,id):
+	results=pslot.objects.get(id=id)
+	pid=results.propertyid.id
+	results.delete()
+	return redirect('/vpdetails/'+str(pid))

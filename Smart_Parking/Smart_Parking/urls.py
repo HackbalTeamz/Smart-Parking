@@ -35,4 +35,5 @@ urlpatterns = [
     path('uhistory', pv.uhistory,name='uhistory'),
     path('slotmanage', vv.slotmanage,name='slotmanage'),
     path('vpdetails/<int:id>',vv.vpdetails,name="vpdetails"),
+    path('deleteslot/<int:id>',vv.deleteslot,name="deleteslot"),
 ]+ static(settings.MEDIA_URL, document_root= settings.MEDIA_ROOT)
