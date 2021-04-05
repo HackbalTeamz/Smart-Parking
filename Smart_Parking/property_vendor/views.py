@@ -9,3 +9,30 @@ def slotmanage(request):
 	print(results)
 	return render(request,'vendor/dashboard.html',{'pbooks':results})
 
+def vpdetails(request,id):
+	isfw=False
+	istw=False
+	isroofed=False
+	isfenced=False
+	isavailable=False
+	buyed=False
+	result=property.objects.get(id=id)
+	plotresult=pslot.objects.filter(propertyid=id)
+	for plot in plotresult:
+		if plot.isfw:
+			isfw=True
+		if plot.istw:
+			istw=True
+		if plot.isroofed:
+			isroofed=True
+		if plot.isfenced:
+			isfenced=True
+		if plot.isavailable:
+			isavailable=True
+
+	try:
+		chkreview=reviewDetails.objects.filter(propertyid=result)
+	except reviewDetails.DoesNotExist:
+		chkreview=None
+
+	return render(request,'vendor/single.html',{'chkreview':chkreview,'pslots':plotresult,'property':result,'isavailable':isavailable,'istw':istw,'isfw':isfw,'isfenced':isfenced,'isroofed':isroofed})

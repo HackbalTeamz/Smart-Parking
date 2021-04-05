@@ -34,4 +34,5 @@ urlpatterns = [
     path('addreview', pv.addreview,name='add_review'),
     path('uhistory', pv.uhistory,name='uhistory'),
     path('slotmanage', vv.slotmanage,name='slotmanage'),
+    path('vpdetails/<int:id>',vv.vpdetails,name="vpdetails"),
 ]+ static(settings.MEDIA_URL, document_root= settings.MEDIA_ROOT)

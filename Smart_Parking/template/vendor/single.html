@@ -1,0 +1,164 @@
+{% extends 'public/base.html' %}
+{% load static %}
+
+{% block content %}
+
+       
+
+            <section id="car-1-features-2" class="holiday-sec" style="padding-top: 12em;">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-7 col-sm-push-6">
+                            <figure class="car-1-feature-image animate-box audi-car">
+                            
+                                <div class="slideshow-container">
+
+  <!-- Full-width images with number and caption text -->
+  <div class="mySlides fade">
+   
+    <img src="{{ property.img1.url}}" style="width:100%">
+  
+  </div>
+
+  <div class="mySlides fade">
+    
+    <img src="{{ property.img2.url}}" style="width:100%">
+   
+  </div>
+
+  <div class="mySlides fade">
+   
+    <img src="{{ property.img3.url}}" style="width:100%">
+    
+  </div>
+
+ 
+</div>
+
+
+                            </figure>
+                        </div>
+                        <div class="col-sm-5 col-sm-pull-7">
+                            <h2 class="car-1-lead animate-box">{{ property.name}}</h2>
+                            <div class="vehicle-info">
+                                <p class="animate-box" style="font-size: 21px;font-weight: 400;">{{ property.place }},{{ property.district }} </p>
+                                <p class="animate-box">{{ property.description}}</p>
+                                <ul>
+                                    
+
+
+
+                             
+                                    <li class="animate-box">4 wheeler <span>{% if isfw %}yes{% else %}No{% endif %}</span>
+                                    </li>
+                                    <li class="animate-box">2 wheeler <span>{% if istw %}yes{% else %}No{% endif %}</span>
+                                    </li>
+                                    <li class="animate-box">Roof<span>{% if isroofed %}yes{% else %}No{% endif %}</span>
+                                    </li>
+                                    <li class="animate-box">Fence<span>{% if isfenced %}yes{% else %}No{% endif %}</span>
+                                    </li>
+                                    <li class="animate-box">Empty Slot Available<span>{% if isavailable %}yes{% else %}No{% endif %}</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="car-1-btn-action animate-box">
+                                
+                                <a class="button btn btn-primary btn-cta" href="#popup1">View Slots</a>
+                                <a class="button btn btn-primary btn-cta" href="#popup1">Delete property</a>
+   
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </section>
+            
+           <section id="car-1-features-2" class="holiday-sec" style="padding-top: 12em;">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-7 col-sm-push-6">
+                            <div>
+        {% autoescape off %}{{property.mapurl}}{% endautoescape %}  
+        </div>
+                        </div>
+                        <div class="col-sm-5 col-sm-pull-7" style=" padding:20px 15px;">
+                            <h2 class="car-1-lead animate-box">REVIEWS</h2>
+                            <div class="vehicle-info" style="overflow-y: scroll; height: 200px;">
+                              {% if chkreview %}
+                    {% for review in chkreview %}  
+                                 <div>
+                                    <h3>{{ review.userid.first_name }}  {{ review.userid.last_name }}</h3>
+                                    <p class="animate-box">{{ review.review }}</p>
+                                </div>
+
+                    {% endfor %}
+                     {% else %}
+                                
+                                <div>
+                                   
+                                    <p class="animate-box">NoReviews yet..!</p>
+                                </div>
+                               
+                                {% endif %}
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+<div id="popup1" class="overlay">
+    <div class="popup">
+        <h2>Manage slots</h2>
+        <a class="close" href="#0">&times;</a>
+        <div class="content">
+
+
+
+            <div class="time-slot ng-scope" style="    height: 70vh;overflow-y: scroll;">  
+                {% if pslots %}
+
+                {% for pslot in pslots %}
+                {% if pslot.isavailable %}
+          
+        <label for="Monday-0" class="ng-binding available">{{ pslot.id}}<br>
+          <span class="ng-scope">4 wheeler : <span>{% if pslot.isfw %}yes{% else %}No{% endif %}</span></span><br>
+           <span class="ng-scope">2 wheeler : <span>{% if pslot.istw %}yes{% else %}No{% endif %}</span></span><br>
+            <span class="ng-scope">Roof : <span>{% if pslot.isroofed %}yes{% else %}No{% endif %}</span></span><br>
+             <span class="ng-scope">Fence : <span>{% if pslot.isfenced %}yes{% else %}No{% endif %}</span></span><br>
+             <span class="ng-scope">Rate/min : <span>₹ {{ pslot.rate }}</span></span><br>
+             <span class="ng-scope">Available </span><br>
+             <a class="button btn btn-primary btn-cta" style="background:white;color:black;border-radius: 10px;" href="#popup1">Edit Slots</a><br>
+             <a class="button btn btn-primary btn-cta" style="background:white;color:black;border-radius: 10px;" href="#popup1">Delete Slots</a>
+        </label>
+        {% else %}
+
+        <label for="Monday-0" class="unavailable">{{ pslot.id}}<br>
+          <span class="ng-scope">4 wheeler : <span>{% if pslot.isfw %}yes{% else %}No{% endif %}</span></span><br>
+           <span class="ng-scope">2 wheeler : <span>{% if pslot.istw %}yes{% else %}No{% endif %}</span></span><br>
+            <span class="ng-scope">Roof : <span>{% if pslot.isroofed %}yes{% else %}No{% endif %}</span></span><br>
+             <span class="ng-scope">Fence : <span>{% if pslot.isfenced %}yes{% else %}No{% endif %}</span></span><br>
+             <span class="ng-scope">Rate/min : <span>₹ {{ pslot.rate }}</span></span><br>
+             <span class="ng-scope">UnAvailable </span><br>
+             <a class="button btn btn-primary btn-cta" style="background:white;color:black;border-radius: 10px;" href="#popup1">Edit Slots</a><br>
+             
+        </label>
+            {% endif %}
+        
+     
+     {% endfor %}
+
+     {% else %}
+     <span class="ng-scope" style="    color: black;">No slotes available </span>
+      {% endif %}
+
+
+      </div>
+
+
+
+
+              </div>
+    </div>
+</div>
+           {% endblock %}
