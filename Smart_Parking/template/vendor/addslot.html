@@ -1,0 +1,35 @@
+{% extends 'public/base.html' %}
+{% load static %}
+
+{% block content %}
+
+       
+            <section id="login-sec">
+                <div class="container login-sec">
+                    <form class="login-form" method="post" action="/addslot">
+                       {% csrf_token %}
+                        <h2>Add Slot</h2>
+
+                        <ul>
+                            <li><label for=""> Property Id</label><br><input type="text" name="propertyid" value="{{ results.id }}" class="login-txt" readonly=""></li>
+                            <li><input type="checkbox"  name="istw" value="1">&nbsp;
+                            <label for="vehicle1"> For Two Wheeler</label><br></li>
+                            <li><input type="checkbox"  name="isfw" value="1">&nbsp;
+                            <label for="vehicle1"> For Four Wheeler</label><br></li>
+                        </ul>
+                        
+                        <ul>
+                            <li><label for=""> Rate</label><br><input type="number" name="rate" value="" class="login-txt" required=""></li>
+                            
+                           
+                            <li><input type="checkbox"  name="isroofed" value="1">&nbsp;
+                        <label for=""> Roofedr</label><br></li>
+                        <li><input type="checkbox"  name="isfenced" value="1">&nbsp;
+                        <label for=""> Fenced</label><br></li>
+                        
+                        </ul>
+                        <li><input type="submit" value="Add Slot" class="btn btn-primary login-btn"></li>
+                    </form>
+                </div>
+            </section>
+{% endblock %}

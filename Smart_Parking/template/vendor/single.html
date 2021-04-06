@@ -117,7 +117,7 @@
 
             <div class="time-slot ng-scope" style="    height: 70vh;overflow-y: scroll;">  
                 {% if pslots %}
-
+                 <a class="button btn btn-primary btn-cta" style=";border-radius: 10px;" href="/addslot?id={{property.id }}">Add Slots</a><br>
                 {% for pslot in pslots %}
                 {% if pslot.isavailable %}
           
@@ -149,7 +149,8 @@
      {% endfor %}
 
      {% else %}
-     <span class="ng-scope" style="    color: black;">No slotes available </span>
+     <span class="ng-scope" style="    color: black;">No slotes available </span><br>
+     <a class="button btn btn-primary btn-cta" style=";border-radius: 10px;" href="/addslot?id={{property.id }}">Add Slots</a><br>
       {% endif %}
 
 

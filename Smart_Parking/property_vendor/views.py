@@ -42,3 +42,37 @@ def deleteslot(request,id):
 	pid=results.propertyid.id
 	results.delete()
 	return redirect('/vpdetails/'+str(pid))
+
+def addslot(request):
+	if request.method=='POST':
+		propertyid=request.POST['propertyid']
+		try:
+			isfw=request.POST['isfw']
+			isfw=True
+		except:
+			isfw=False
+		try:
+			istw=request.POST['istw']
+			istw=True
+		except:
+			istw=False
+		try:
+			isroofed=request.POST['isroofed']
+			isroofed=True
+		except:
+			isroofed=False
+		try:
+			isfenced=request.POST['isfenced']
+			isfenced=True
+		except:
+			isfenced=False
+		rate=request.POST['rate']
+		results=property.objects.get(id=propertyid)
+		instance=pslot(propertyid=results,isfw=isfw,istw=istw,isroofed=isroofed,isfenced=isfenced,rate=rate)
+		instance.save()
+
+		return redirect('/vpdetails/'+str(results.id))
+	else:
+		id=request.GET['id']
+		results=property.objects.get(id=id)
+		return render(request,'vendor/addslot.html',{"results":results})
