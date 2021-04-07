@@ -76,3 +76,41 @@ def addslot(request):
 		id=request.GET['id']
 		results=property.objects.get(id=id)
 		return render(request,'vendor/addslot.html',{"results":results})
+
+def editslot(request):
+	if request.method=='POST':
+		pslotid=request.POST['pslotid']
+		try:
+			isfw=request.POST['isfw']
+			isfw=True
+		except:
+			isfw=False
+		try:
+			istw=request.POST['istw']
+			istw=True
+		except:
+			istw=False
+		try:
+			isroofed=request.POST['isroofed']
+			isroofed=True
+		except:
+			isroofed=False
+		try:
+			isfenced=request.POST['isfenced']
+			isfenced=True
+		except:
+			isfenced=False
+		rate=request.POST['rate']
+		results=pslot.objects.get(id=pslotid)
+		results.isfw=isfw
+		results.istw=istw
+		results.isroofed=isroofed
+		results.isfenced=isfenced
+		results.rate=rate
+		results.save()
+
+		return redirect('/vpdetails/'+str(results.propertyid.id))
+	else:
+		id=request.GET['id']
+		results=pslot.objects.get(id=id)
+		return render(request,'vendor/editslot.html',{"results":results})

@@ -128,7 +128,7 @@
              <span class="ng-scope">Fence : <span>{% if pslot.isfenced %}yes{% else %}No{% endif %}</span></span><br>
              <span class="ng-scope">Rate/min : <span>₹ {{ pslot.rate }}</span></span><br>
              <span class="ng-scope">Available </span><br>
-             <a class="button btn btn-primary btn-cta" style="background:white;color:black;border-radius: 10px;" href="#popup1">Edit Slots</a><br>
+             <a class="button btn btn-primary btn-cta" style="background:white;color:black;border-radius: 10px;" href="/editslot?id={{pslot.id }}">Edit Slots</a><br>
              <a class="button btn btn-primary btn-cta" style="background:white;color:black;border-radius: 10px;" href="/deleteslot/{{ pslot.id}}" onclick="return confirm('Are you sure you want to delete?');">Delete Slots</a>
         </label>
         {% else %}
@@ -140,7 +140,7 @@
              <span class="ng-scope">Fence : <span>{% if pslot.isfenced %}yes{% else %}No{% endif %}</span></span><br>
              <span class="ng-scope">Rate/min : <span>₹ {{ pslot.rate }}</span></span><br>
              <span class="ng-scope">UnAvailable </span><br>
-             <a class="button btn btn-primary btn-cta" style="background:white;color:black;border-radius: 10px;" href="#popup1">Edit Slots</a><br>
+             <a class="button btn btn-primary btn-cta" style="background:white;color:black;border-radius: 10px;" href="/editslot?id={{pslot.id }}">Edit Slots</a><br>
              
         </label>
             {% endif %}

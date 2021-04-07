@@ -37,4 +37,5 @@ urlpatterns = [
     path('vpdetails/<int:id>',vv.vpdetails,name="vpdetails"),
     path('deleteslot/<int:id>',vv.deleteslot,name="deleteslot"),
     path('addslot',vv.addslot,name="addslot"),
+    path('editslot',vv.editslot,name="editslot"),
 ]+ static(settings.MEDIA_URL, document_root= settings.MEDIA_ROOT)
