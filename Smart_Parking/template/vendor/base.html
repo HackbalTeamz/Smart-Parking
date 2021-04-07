@@ -36,7 +36,10 @@
                             <li><a href="/">User Home</a>
                             </li>
                             {% endif %}
-
+                            {% if  user.userprofile.isvendor == True %}
+                            <li><a href="/slotmanage" style="">Vendor Dashboard</a>
+                            </li>
+                            {% endif %}
                         
                         </ul>
                         <h1 id="car-1-logo"><a href="/"><img src="{% static 'public/images/logo.png' %}"></a></h1>
