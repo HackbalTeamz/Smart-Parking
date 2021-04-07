@@ -1,0 +1,36 @@
+{% extends 'vendor/base.html' %}
+{% load static %}
+
+{% block content %}
+
+       
+            <section id="login-sec">
+                <div class="container login-sec">
+                    <form class="login-form" style="    line-height: normal;" method="post" action="/editproperty" enctype="multipart/form-data">
+                       {% csrf_token %}
+
+
+                        <h2>Edit Property</h2>
+
+                        <ul>
+                            <li style="margin-bottom: 0px"><input type="text" name="propertyid" value="{{ results.id }}" class="login-txt" hidden=""></li>
+                            <li><label for=""> name</label><br><input type="text" name="name" value="{{ results.name }}" class="login-txt" ></li>
+
+                            <li><label for=""> description</label><br><input type="text" name="description" value="{{ results.description }}" class="login-txt" ></li>
+                            <li><label for=""> mapurl</label><br><input type="text" name="mapurl" value="{{ results.mapurl }}" class="login-txt" ></li>
+                            <li><label for=""> upi</label><br><input type="text" name="upi" value="{{ results.upi }}" class="login-txt" readonly=""></li>
+                            <li><label for=""> place</label><br><input type="text" name="place" value="{{ results.place }}" class="login-txt" ></li>
+                        </ul>
+                        
+                        <ul>
+                            <li><label for=""> isactive</label><br><input type="checkbox"  name="isactive" value="1" {% if results.isactive %} checked {% endif %}></li>
+                            {{ form }}
+                           <li><label for=""> district</label><br><input type="text" name="district" value="{{ results.district }}" class="login-txt" ></li>
+                            
+                        
+                        </ul>
+                        <li><input type="submit" value="Edit Property" class="btn btn-primary login-btn"></li>
+                    </form>
+                </div>
+            </section>
+{% endblock %}

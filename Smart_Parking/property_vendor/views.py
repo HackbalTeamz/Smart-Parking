@@ -1,8 +1,14 @@
 from django.shortcuts import render, redirect
 from .models import property,pslot,userProfile,bookingDetails,mark_pslot_unavailable,mark_pslot_available,reviewDetails
 from django.contrib.auth.models import User, auth
+from django.forms import ModelForm
 
 # Create your views here.
+class EditProperty(ModelForm):
+	class Meta:
+	    model = property
+	    fields = ['img1','img2','img3']
+
 def slotmanage(request):
 
 	results=property.objects.filter(owner=request.user)
@@ -114,3 +120,55 @@ def editslot(request):
 		id=request.GET['id']
 		results=pslot.objects.get(id=id)
 		return render(request,'vendor/editslot.html',{"results":results})
+
+def editproperty(request):
+	if request.method=='POST':
+		try:
+			isactive=request.POST['isactive']
+			isactive=True
+		except:
+			isactive=False
+		
+		propertyid=request.POST['propertyid']
+		name=request.POST['name']
+		description=request.POST['description']
+		mapurl=request.POST['mapurl']
+		upi=request.POST['upi']
+		place=request.POST['place']
+		district=request.POST['district']
+		try:
+			img1=request.FILES['img1']
+			
+		except:
+			img1=None
+		try:
+			img2=request.FILES['img2']
+		except:
+			img2=None
+		try:
+			img3=request.FILES['img3']
+		except:
+			img3=None
+
+		results=property.objects.get(id=propertyid)
+		results.name=name
+		results.description=description
+		results.mapurl=mapurl
+		results.upi=upi
+		results.place=place
+		results.district=district
+		if img1:
+			results.img1=img1
+		if img2:
+			results.img2=img2
+		if img3:
+			results.img3=img3
+		results.save()
+
+		return redirect('/vpdetails/'+str(results.id))
+	else:
+		id=request.GET['id']
+		results=property.objects.get(id=id)
+		form = EditProperty(initial={'img1':results.img1,'img2':results.img2,'img3':results.img3})
+		
+		return render(request,'vendor/editproperty.html',{'results':results,'form':form})
