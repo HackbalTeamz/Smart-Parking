@@ -36,6 +36,7 @@ urlpatterns = [
     path('slotmanage', vv.slotmanage,name='slotmanage'),
     path('vpdetails/<int:id>',vv.vpdetails,name="vpdetails"),
     path('deleteslot/<int:id>',vv.deleteslot,name="deleteslot"),
+    path('deleteproperty/<int:id>',vv.deleteproperty,name="deleteproperty"),
     path('addslot',vv.addslot,name="addslot"),
     path('editslot',vv.editslot,name="editslot"),
     path('editproperty',vv.editproperty,name="editproperty"),

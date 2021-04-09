@@ -172,3 +172,8 @@ def editproperty(request):
 		form = EditProperty(initial={'img1':results.img1,'img2':results.img2,'img3':results.img3})
 		
 		return render(request,'vendor/editproperty.html',{'results':results,'form':form})
+
+def deleteproperty(request,id):
+	results=property.objects.get(id=id)
+	results.delete()
+	return redirect('/slotmanage')
