@@ -214,3 +214,12 @@ def addproperty(request):
 		form = EditProperty()
 		
 		return render(request,'vendor/addproperty.html',{'form':form})
+
+def vhistory(request):
+	try:
+		
+		booklist=bookingDetails.objects.filter(pslotid__propertyid__owner=request.user,status=False).order_by('-id')
+		print(booklist)
+	except:
+		booklist=None
+	return render(request,'vendor/vhistory.html',{'history':booklist})

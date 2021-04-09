@@ -1,0 +1,150 @@
+{% extends 'vendor/base.html' %}
+{% load static %}
+
+{% block content %}
+
+            
+            <section id="car-1-projects" style="padding-top: 8em;">
+                <div class="container">
+                    <div class="row row-bottom-padded-md">
+                        <div class="col-md-8 col-md-offset-2 text-center welcome-sec">
+                            <h2 class="car-1-lead animate-box">Your Slot Booking History</h2>
+                        </div>
+                    </div>
+                    <div class="row car-info">
+                         {% if history %}
+                        {% for item in history %}
+                        <div class="col-md-12 text-center" style="background: white;    margin-bottom: 19px;">
+                            <div class="col-md-4  " style="    padding: 15px 0;">
+                                <a href="{{ item.pslotid.propertyid.img1.url }}" class="image-popup">
+                                <img src="{{ item.pslotid.propertyid.img1.url }}" alt="Image" class="img-responsive">
+                                </a>
+                            </div>
+                                <div class="col-md-4 align-middle" style=" ">
+                                    <div style="    padding: 25px 0;">
+                                    <h2 style="color: black;text-align: center;">{{ item.pslotid.propertyid.name }}</h2>
+                                    <table>
+                                    <tr>    
+                                        <td><h4 style="color: black;text-align: center;">Booking date:</h4></td>
+                                        <td><h5 style="color: black;text-align: center;">{{ item.bdate }}</h5></td>
+
+                                    </tr>
+                                    <tr>    
+                                        <td><h4 style="color: black;text-align: center;">Pslot id:</h4></td>
+                                        <td><h5 style="color: black;text-align: center;">{{ item.pslotid.id }}</h5></td>
+
+                                    </tr>
+                                    <tr>    
+                                        <td><h4 style="color: black;text-align: center;">Checkout date:</h4></td>
+                                        <td><h5 style="color: black;text-align: center;">{{ item.cdate }}</h5></td>
+
+                                    </tr>
+                                    <tr>    
+                                        <td><h4 style="color: black;text-align: center;">Reg Num:</h4></td>
+                                        <td><h5 style="color: black;text-align: center;">{{ item.regnum }}({{ item.vtype }} wheeler)</h5></td>
+
+                                    </tr>
+                                    <tr>    
+                                        <td><h4 style="color: black;text-align: center;">Amount:</h4></td>
+                                        <td><h5 style="color: black;text-align: center;">{{ item.amt }}</h5></td>
+
+                                    </tr>
+                                      <tr>    
+                                        
+                                        <p style="color: black;text-align: center;"><b style="font-weight: 300;">{{ item.pslotid.propertyid.place }},{{ item.pslotid.propertyid.district }} </b>
+                                    </p>
+
+                                    </tr>                      
+                                     
+                                        </table>
+                                    
+                                    </div>
+                                    
+                                </div>
+                                 <div class="col-md-4 " style="text-align: center;padding: 95px;">
+                                    <p>
+                                     <a class="dashbtn" href="/vpdetails/{{item.pslotid.propertyid.id}}">View</a>
+                              </p>
+                                   
+                                </div>
+                            
+                        </div>
+
+                        {% endfor %}
+                        {% else %}
+                        <div class="col-md-12 col-sm-6 col-xs-6 col-xxs-12 " style="text-align: center;">
+                            <h2>No Booking Found..!</h2>
+                            
+                        </div>
+                        {% endif %}
+
+                    </div>
+                </div>
+            </section>
+           
+      
+        <script type="text/javascript">
+            if ($(window).width() < 767) {
+                 $(document).ready(function () {
+                      $('.ft-col h3').click(function () {
+                          $('ul.ac-ul').slideUp('500');
+                          $('h3').children('span').html('<i class="fa fa-plus"></i>');  
+                          var text = $(this).parent().children('ul.ac-ul');
+            
+                          if (text.is(':hidden')) {
+                            text.slideDown('500');
+                            $(this).children('span').html('<i class="fa fa-minus"></i>');   
+                          } else {
+                            text.slideUp('500');
+                            $(this).children('span').html('<i class="fa fa-plus"></i>');    
+                          }
+                    
+                        });
+            
+                      });
+            
+                  }
+                    
+        </script>   
+        <script>
+            $(function() {
+                $('#colour-variations ul').styleSwitcher({
+                    defaultThemeId: 'theme-switch',
+                    hasPreview: false,
+                    cookie: {
+                        expires: 30,
+                        isManagingLoad: true
+                    }
+                });
+                $('.option-toggle').click(function() {
+                    $('#colour-variations').toggleClass('sleep');
+                });
+            });
+        </script>
+
+        <script>
+            $(function() {
+            
+                if ($.cookie('layoutCookie') != '') {
+                    $('body').addClass($.cookie('layoutCookie'));
+                }
+                $('a[data-layout="boxed"]').click(function(event) {
+                    event.preventDefault();
+                    $.cookie('layoutCookie', 'boxed', {
+                        expires: 7,
+                        path: '/'
+                    });
+                    $('body').addClass($.cookie('layoutCookie')); // the value is boxed.
+                });
+                $('a[data-layout="wide"]').click(function(event) {
+                    event.preventDefault();
+                    $('body').removeClass($.cookie('layoutCookie')); // the value is boxed.
+                    $.removeCookie('layoutCookie', {
+                        path: '/'
+                    }); // remove the value of our cookie 'layoutCookie'
+                });
+            });
+        </script>
+
+
+ {% endblock %}
