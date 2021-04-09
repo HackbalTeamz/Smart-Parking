@@ -160,3 +160,31 @@ def login(request):
 			return render(request,"public/login.html",{'status':True})
 	else:
 		return render(request,"public/login.html")
+
+def signup(request):
+	if not request.user.is_anonymous:
+		return redirect('/')
+	if request.method == 'POST':
+		Username=request.POST['Username']
+		Password=request.POST['Password']
+		Firstname=request.POST['Firstname']
+		Lastname=request.POST['Lastname']
+		Email=request.POST['Email']
+		state=request.POST['state']
+		house=request.POST['house']
+		town=request.POST['town']
+		pincode=request.POST['pincode']
+		phone=request.POST['phone']
+		try:
+			user =User.objects.create_user(username=Username,first_name=Firstname,last_name=Lastname,email=Email,password=Password)
+			userp=userProfile.objects.create(user=user,state=state,house=house,town=town,pincode=pincode,phone=phone)
+			user.save()
+			userp.save()
+			print('created')
+		except Exception as e:
+			if 'UNIQUE constraint' in str(e):
+				return render(request,"public/signup.html",{'msg':"username/email already taken"})
+			return render(request,"public/signup.html",{'msg':e})
+		return render(request,"public/signup.html",{'msg':"Account created successfully"})
+	else:
+		return render(request,"public/signup.html")
