@@ -177,3 +177,40 @@ def deleteproperty(request,id):
 	results=property.objects.get(id=id)
 	results.delete()
 	return redirect('/slotmanage')
+
+def addproperty(request):
+	if request.method=='POST':
+		try:
+			isactive=request.POST['isactive']
+			isactive=True
+		except:
+			isactive=False
+		
+		name=request.POST['name']
+		description=request.POST['description']
+		mapurl=request.POST['mapurl']
+		upi=request.POST['upi']
+		place=request.POST['place']
+		district=request.POST['district']
+		try:
+			img1=request.FILES['img1']
+			
+		except:
+			img1=None
+		try:
+			img2=request.FILES['img2']
+		except:
+			img2=None
+		try:
+			img3=request.FILES['img3']
+		except:
+			img3=None
+
+		
+		results=property.objects.create(name=name,description=description,mapurl=mapurl,upi=upi,place=place,district=district,img1=img1,img2=img2,img3=img3,owner=request.user)
+		results.save()
+		return redirect('/slotmanage')
+	else:
+		form = EditProperty()
+		
+		return render(request,'vendor/addproperty.html',{'form':form})
