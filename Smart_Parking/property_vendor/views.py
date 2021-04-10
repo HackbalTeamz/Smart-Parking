@@ -223,3 +223,6 @@ def vhistory(request):
 	except:
 		booklist=None
 	return render(request,'vendor/vhistory.html',{'history':booklist})
+
+def vabout(request):
+	return render(request,'vendor/about.html')

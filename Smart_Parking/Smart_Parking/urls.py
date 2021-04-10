@@ -43,4 +43,6 @@ urlpatterns = [
     path('editproperty',vv.editproperty,name="editproperty"),
     path('vhistory', vv.vhistory,name='vhistory'),
     path('signup', pv.signup,name='signup'),
+    path('pabout', pv.pabout,name='pabout'),
+    path('vabout', vv.vabout,name='vabout'),
 ]+ static(settings.MEDIA_URL, document_root= settings.MEDIA_ROOT)

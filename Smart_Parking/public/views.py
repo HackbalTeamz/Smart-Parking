@@ -188,3 +188,6 @@ def signup(request):
 		return render(request,"public/signup.html",{'msg':"Account created successfully"})
 	else:
 		return render(request,"public/signup.html")
+
+def pabout(request):
+	return render(request,'public/about.html')
