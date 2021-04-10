@@ -80,16 +80,14 @@
                                 <div class="car-1-footer-widget ft-col">
                                     <h3>Company <span class="pls pull-right"><i class="fa fa-plus"></i></span></h3>
                                     <ul class="car-1-links ac-ul">
-                                        <li><a href="#">About Us</a>
+                                        <li><a href="/pabout">About Us</a>
                                         </li>
-                                        <li><a href="#">Luxury cars</a>
+                                         {% if not user.is_authenticated %}
+                      
+                                        <li><a href="/vsignup">Vendor Signup</a>
                                         </li>
-                                        <li><a href="#">Feature Cars</a>
-                                        </li>
-                                        <li><a href="#">Pricing</a>
-                                        </li>
-                                        <li><a href="#">Team</a>
-                                        </li>
+                                              {% endif %}
+                                       
                                     </ul>
                                 </div>
                             </div>

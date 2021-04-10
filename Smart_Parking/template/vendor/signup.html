@@ -1,0 +1,38 @@
+{% extends 'public/base.html' %}
+{% load static %}
+
+{% block content %}
+
+            
+            <section id="login-sec">
+                <div class="container login-sec">
+                    <form class="login-form" action="/vsignup" method="post">
+                         {% csrf_token %}
+                        <h2>Vendor Signup</h2>
+                        <h6 style="text-align: center;color: red;">{{msg}}</h6>
+                        <ul>
+                            
+                            
+                            <li><input type="text" placeholder="First name"  name="Firstname" class="login-txt" required=""></li>
+                            <li><input type="text" placeholder="Last name"  name="Lastname" class="login-txt" required=""></li>
+                            <li><input type="text" placeholder="Username" name="Username" class="login-txt" required=""></li>
+                            <li><input type="Password" placeholder="Password"  name="Password" class="login-txt" required=""></li>
+                            <li><input type="email" placeholder="Email"  name="Email" class="login-txt" required=""></li>
+                        </ul>
+
+                        <ul>
+                           <li><input type="text" placeholder="state" name="state" class="login-txt" required=""></li>
+                            <li><input type="text" placeholder="house"  name="house" class="login-txt" required=""></li>
+                            <li><input type="text" placeholder="town"  name="town" class="login-txt" required=""></li>
+                            <li><input type="number" placeholder="pincode"  name="pincode" class="login-txt" required=""></li>
+                            <li><input type="number" placeholder="phone"  name="phone" class="login-txt" required=""></li>
+                        </ul>
+                         <li><input type="submit" value="Signup" class="btn btn-primary login-btn"></li>
+                    </form>
+                </div>
+            </section>
+
+
+{% endblock %}
+
+            
