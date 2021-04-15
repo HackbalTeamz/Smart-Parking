@@ -67,6 +67,12 @@ def booking(request,id):
 		regno=request.POST['regno']
 		vtype=request.POST['type']
 		slot=pslot.objects.get(id=id)
+		try:
+			tmp=bookingDetails.objects.get(userid=request.user,pslotid=slot,vtype=vtype,regnum=regno,status=True)
+		except:
+			tmp=None
+		if tmp:
+			return redirect('/dashboard')
 		pbook=bookingDetails.objects.create(userid=request.user,pslotid=slot,vtype=vtype,regnum=regno,status=True)
 		pbook.save()
 		print('created')
