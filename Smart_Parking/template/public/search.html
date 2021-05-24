@@ -12,8 +12,9 @@
                             
                         </div>
                     </div>
+                    {% if results %}
                     <div class="row car-info">
-
+                        
                         {% for item in results %}
                         <div class="col-md-4 col-sm-6 col-xs-6 col-xxs-12 animate-box">
                             <div class="car-1-project-item">
@@ -29,8 +30,11 @@
                         </div>
 
                         {% endfor %}
-
+                       
                     </div>
+                     {% else %}
+                        <h6 class=" animate-box" style="    text-align: center;">No parking area found</h6>
+                        {% endif %}
                 </div>
             </section>
            
