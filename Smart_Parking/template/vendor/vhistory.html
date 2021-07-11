@@ -53,8 +53,13 @@
 
                                     </tr>
                                     <tr>    
-                                        <td><h4 style="color: black;text-align: center;">Checkout date:</h4></td>
-                                        <td><h5 style="color: black;text-align: center;">{{ item.cdate }}</h5></td>
+                                        <td><h4 style="color: black;text-align: center;">Name:</h4></td>
+                                        <td><h5 style="color: black;text-align: center;">{{ item.userid.first_name }}</h5></td>
+
+                                    </tr>
+                                    <tr>    
+                                        <td><h4 style="color: black;text-align: center;">Email :</h4></td>
+                                        <td><h5 style="color: black;text-align: center;">{{ item.userid.email }}</h5></td>
 
                                     </tr>
                                     <tr>    
@@ -62,11 +67,7 @@
                                         <td><h5 style="color: black;text-align: center;">{{ item.regnum }}({{ item.vtype }} wheeler)</h5></td>
 
                                     </tr>
-                                    <tr>    
-                                        <td><h4 style="color: black;text-align: center;">Amount:</h4></td>
-                                        <td><h5 style="color: black;text-align: center;">{{ item.amt }}</h5></td>
-
-                                    </tr>
+                                    
                                       <tr>    
                                         
                                         <p style="color: black;text-align: center;"><b style="font-weight: 300;">{{ item.pslotid.propertyid.place }},{{ item.pslotid.propertyid.district }} </b>
