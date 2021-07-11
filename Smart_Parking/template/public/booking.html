@@ -9,13 +9,13 @@
                         {% csrf_token %}
                         <ul>
                             <h2>Booking Details</h2>
-                            <li><input type="text" name="regno" placeholder="Registration Number" class="login-txt"></li>
+                            <li><input required="" type="text" name="regno" placeholder="Registration Number" class="login-txt"></li>
                             <li><select name="type" class="animate-box rent-selct" required="">
                                            <option value= "" selected disabled hidden>Choose Vehicle Type</option>
                                             <option value="2">2 wheeler</option>
                                             <option value="4">4 wheeler</option>
                                         </select></li>
-                            <li>{% if user.is_authenticated %}<input type="submit" class="btn btn-primary" value="Book">
+                            <li>{% if user.is_authenticated %}<input required="" type="submit" class="btn btn-primary" value="Book">
                             {%else%}
                         <a href="/login" class="btn btn-primary" >Sign in to Book</a>
                     {%endif%}
