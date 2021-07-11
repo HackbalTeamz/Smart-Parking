@@ -56,6 +56,12 @@ class bookingDetails(models.Model):
 	amt = models.IntegerField(default=0)
 	status = models.BooleanField(default=True)
 
+class reportDetails(models.Model):
+	userid = models.ForeignKey(User,default=None,on_delete=models.CASCADE)
+	reportedby  = models.ForeignKey(User,default=None,on_delete=models.CASCADE,related_name='+')
+	rdate = models.DateTimeField(default=datetime.now, blank=True)
+	status = models.BooleanField(default=True)
+
 def mark_pslot_unavailable(pid):
 	slot=pslot.objects.get(id=pid)
 	book=bookingDetails.objects.get(pslotid=slot,status=True)

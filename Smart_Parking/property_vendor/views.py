@@ -1,13 +1,32 @@
 from django.shortcuts import render, redirect
-from .models import property,pslot,userProfile,bookingDetails,mark_pslot_unavailable,mark_pslot_available,reviewDetails
+from .models import property,pslot,userProfile,bookingDetails,mark_pslot_unavailable,mark_pslot_available,reviewDetails,reportDetails
 from django.contrib.auth.models import User, auth
 from django.forms import ModelForm
+from django.http import JsonResponse
 
 # Create your views here.
 class EditProperty(ModelForm):
 	class Meta:
 	    model = property
 	    fields = ['img1','img2','img3']
+
+def reportuser(request,id):
+	print("haiii");
+	ruser=User.objects.get(id=id)
+	print(ruser)
+	chkreport=reportDetails.objects.filter(userid=id)
+	print(chkreport.count())
+	if chkreport.count() < 3 :
+		instance=reportDetails(userid=ruser,reportedby=request.user)
+		instance.save()
+		return JsonResponse({"instance": "Success"}, status=200)
+	else:
+		ruser=User.objects.get(id=id)
+		ruser.is_active=False
+		ruser.save()
+		print("user bloked")
+		return JsonResponse({"instance": "Success"}, status=200)
+
 
 def slotmanage(request):
 
@@ -218,11 +237,14 @@ def addproperty(request):
 def vhistory(request):
 	try:
 		
-		booklist=bookingDetails.objects.filter(pslotid__propertyid__owner=request.user,status=False).order_by('-id')
-		print(booklist)
+		booklista=bookingDetails.objects.filter(pslotid__propertyid__owner=request.user,status=False).order_by('-id')
+		booklistn=bookingDetails.objects.filter(pslotid__propertyid__owner=request.user,status=True).order_by('-id')
+		print(booklista)
+		print(booklistn)
 	except:
-		booklist=None
-	return render(request,'vendor/vhistory.html',{'history':booklist})
+		booklista=None
+		booklistn=None
+	return render(request,'vendor/vhistory.html',{'ahistory':booklista,'nhistory':booklistn})
 
 def vabout(request):
 	return render(request,'vendor/about.html')

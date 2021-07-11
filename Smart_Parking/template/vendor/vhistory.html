@@ -12,8 +12,26 @@
                         </div>
                     </div>
                     <div class="row car-info">
-                         {% if history %}
-                        {% for item in history %}
+
+
+<div id="exTab1" class="container"> 
+<ul  class="nav nav-pills justify-content-center" style="margin-bottom: 10px;">
+            <li class="active">
+        <a  href="#1a" data-toggle="tab">Active Parking</a>
+            </li>
+            <li><a href="#2a" data-toggle="tab">Non Active Parking</a>
+            </li>
+           
+        </ul>
+
+            <div class="tab-content clearfix">
+              <div class="tab-pane active" id="1a">
+         
+          {% if ahistory %}
+
+                        {% for item in ahistory %}
+
+
                         <div class="col-md-12 text-center" style="background: white;    margin-bottom: 19px;">
                             <div class="col-md-4  " style="    padding: 15px 0;">
                                 <a href="{{ item.pslotid.propertyid.img1.url }}" class="image-popup">
@@ -65,6 +83,9 @@
                                     <p>
                                      <a class="dashbtn" href="/vpdetails/{{item.pslotid.propertyid.id}}">View</a>
                               </p>
+                              <p>
+                                     <a class="dashbtn" onclick='reportuser({{item.userid.id}});' >Report User</a>
+                              </p>
                                    
                                 </div>
                             
@@ -77,6 +98,91 @@
                             
                         </div>
                         {% endif %}
+
+                </div>
+                <div class="tab-pane" id="2a">
+          
+          {% if nhistory %}
+
+                        {% for item in nhistory %}
+
+
+                        <div class="col-md-12 text-center" style="background: white;    margin-bottom: 19px;">
+                            <div class="col-md-4  " style="    padding: 15px 0;">
+                                <a href="{{ item.pslotid.propertyid.img1.url }}" class="image-popup">
+                                <img src="{{ item.pslotid.propertyid.img1.url }}" alt="Image" class="img-responsive">
+                                </a>
+                            </div>
+                                <div class="col-md-4 align-middle" style=" ">
+                                    <div style="    padding: 25px 0;">
+                                    <h2 style="color: black;text-align: center;">{{ item.pslotid.propertyid.name }}</h2>
+                                    <table>
+                                    <tr>    
+                                        <td><h4 style="color: black;text-align: center;">Booking date:</h4></td>
+                                        <td><h5 style="color: black;text-align: center;">{{ item.bdate }}</h5></td>
+
+                                    </tr>
+                                    <tr>    
+                                        <td><h4 style="color: black;text-align: center;">Pslot id:</h4></td>
+                                        <td><h5 style="color: black;text-align: center;">{{ item.pslotid.id }}</h5></td>
+
+                                    </tr>
+                                    <tr>    
+                                        <td><h4 style="color: black;text-align: center;">Checkout date:</h4></td>
+                                        <td><h5 style="color: black;text-align: center;">{{ item.cdate }}</h5></td>
+
+                                    </tr>
+                                    <tr>    
+                                        <td><h4 style="color: black;text-align: center;">Reg Num:</h4></td>
+                                        <td><h5 style="color: black;text-align: center;">{{ item.regnum }}({{ item.vtype }} wheeler)</h5></td>
+
+                                    </tr>
+                                    <tr>    
+                                        <td><h4 style="color: black;text-align: center;">Amount:</h4></td>
+                                        <td><h5 style="color: black;text-align: center;">{{ item.amt }}</h5></td>
+
+                                    </tr>
+                                      <tr>    
+                                        
+                                        <p style="color: black;text-align: center;"><b style="font-weight: 300;">{{ item.pslotid.propertyid.place }},{{ item.pslotid.propertyid.district }} </b>
+                                    </p>
+
+                                    </tr>                      
+                                     
+                                        </table>
+                                    
+                                    </div>
+                                    
+                                </div>
+                                 <div class="col-md-4 " style="text-align: center;padding: 95px;">
+                                    <p>
+                                     <a class="dashbtn" href="/vpdetails/{{item.pslotid.propertyid.id}}">View</a>
+                              </p>
+                              <p>
+                                     <a class="dashbtn" onclick='reportuser({{item.userid.id}});' >Report User</a>
+                              </p>
+                                   
+                                </div>
+                            
+                        </div>
+
+                        {% endfor %}
+                        {% else %}
+                        <div class="col-md-12 col-sm-6 col-xs-6 col-xxs-12 " style="text-align: center;">
+                            <h2>No Booking Found..!</h2>
+                            
+                        </div>
+                        {% endif %}
+
+                </div>
+       
+            </div>
+  </div>
+
+
+
+
+                       
 
                     </div>
                 </div>
@@ -146,5 +252,24 @@
             });
         </script>
 
+        <script>
+
+        function reportuser(id) {
+            $.ajax({
+                url: '/reportuser/'+id,
+                data: name,
+                contentType: 'application/json;charset=UTF-8',
+                type: "get",
+                async: false,
+                success: function (response) {
+                    alert("user reportes successfully");
+                },
+                error: function (jqXHR, exception) {
+        
+        alert("Something went Wrong, please try after sometiime.");
+    },
+            });
+        }
+        </script>
 
  {% endblock %}

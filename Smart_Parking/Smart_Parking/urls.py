@@ -46,4 +46,5 @@ urlpatterns = [
     path('vsignup', vv.vsignup,name='vsignup'),
     path('pabout', pv.pabout,name='pabout'),
     path('vabout', vv.vabout,name='vabout'),
+    path('reportuser/<int:id>', vv.reportuser,name='reportuser'),
 ]+ static(settings.MEDIA_URL, document_root= settings.MEDIA_ROOT)
