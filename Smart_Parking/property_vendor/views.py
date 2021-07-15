@@ -3,6 +3,7 @@ from .models import property,pslot,userProfile,bookingDetails,mark_pslot_unavail
 from django.contrib.auth.models import User, auth
 from django.forms import ModelForm
 from django.http import JsonResponse
+from datetime import datetime 
 
 # Create your views here.
 class EditProperty(ModelForm):
@@ -16,6 +17,16 @@ def reportuser(request,id):
 	print(ruser)
 	chkreport=reportDetails.objects.filter(userid=id)
 	print(chkreport.count())
+	try:
+		book=bookingDetails.objects.filter(userid=id,status=True,pslotid__propertyid__owner=request.user)
+		for item in book:
+			item.status=False
+			item.cdate=datetime.now()
+			mark_pslot_available(item.pslotid.id)
+			item.save()
+			print('chekout')
+	except Exception as e:
+		print(e)
 	if chkreport.count() < 3 :
 		instance=reportDetails(userid=ruser,reportedby=request.user)
 		instance.save()
@@ -244,7 +255,7 @@ def vhistory(request):
 	except:
 		booklista=None
 		booklistn=None
-	return render(request,'vendor/vhistory.html',{'ahistory':booklista,'nhistory':booklistn})
+	return render(request,'vendor/vhistory.html',{'nhistory':booklista,'ahistory':booklistn})
 
 def vabout(request):
 	return render(request,'vendor/about.html')
